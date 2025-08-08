@@ -1,0 +1,13 @@
+# Prometheus Alert Rule - High Latency
+
+groups:
+- name: sre.rules
+  rules:
+  - alert: HighLatency
+    expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 0.3
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High request latency detected"
+      description: "95th percentile latency is above 300ms for the last 5 minutes"

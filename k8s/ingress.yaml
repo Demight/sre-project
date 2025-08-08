@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sre-demo-ingress
+  namespace: sre-demo
+  annotations:
+    kubernetes.io/ingress.class: "nginx"   # change to your ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sre-demo-service
+            port:
+              number: 80
+
+
+
+
+optional......
